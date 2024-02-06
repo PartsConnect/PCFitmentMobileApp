@@ -1,0 +1,79 @@
+{
+    "@@locale": "en",
+    "helloUser": "Hello, {username}!",
+
+    "loginUserNameLb" : "Useremail",
+    "loginPasswordLb" : "Password",
+    "loginBtnLb" : "Login",
+
+    "dashToolBarTitle" : "Dashboard",
+    "dashMyPlanLb" : "My Plan",
+
+    "dashFitInfoLb" : "Fitment Information",
+    "dashFitInfoTlPartsLb" : "Total # of Parts",
+    "dashFitInfoTlFitmentLb" : "Total # of Fitment",
+    "dashFitInfoTlPartTypeLb" : "Total # of Part Type",
+    "dashFitInfoTlCollectionLb" : "Total Collection",
+    "dashFitInfoTlCollectionWithoutPartLb" : "Total Collection Without Parts",
+    "dashFitInfoTlUniversalPartLb" : "Total Universal Parts",
+
+    "dashUpdateFitInfoLb" : "Updated Info Since Last Data Submission",
+    "dashUpdateFitInfoTlPartsLb" : "Total # of Parts",
+    "dashUpdateFitInfoTlFitmentLb" : "Total # of Fitment",
+    "dashUpdateFitInfoTlPartTypeLb" : "Total # of Part Type",
+
+    "dashMostRecentExportLb" : "Most Recent Export",
+    "dashMostRecentExportDtLb" : "Export Date",
+    "dashMostRecentExportTypeLb" : "Export Type",
+
+    "dialogTitleMlAcLb" : "Add Multiple Account",
+    "dialogMsgMlMsgLb" : "Are you sure you want to add multiple account this app ?",
+    "dialogBtnMlYesLb" : "Cancel",
+    "dialogBtnMlNoLb" : "Add",
+
+    "myAcToolbarTitle" : "My Account",
+    "myAcPersonTabLb" : "Person",
+    "myAcPasswordTabLb" : "Password",
+    "myAcSubscriptionPlanTabLb" : "Subscription Plan",
+    "myAcEbayPlanTabLb" : "Ebay Plan",
+    "myAcBillingHistoryTabLb" : "Billing History",
+
+    "myAcPersonTabFirstName" : "First Name",
+    "myAcPersonTabLastName" : "Last Name",
+    "myAcPersonTabEmail" : "Email",
+    "myAcPersonTabPhoneNo" : "Phone No",
+    "myAcPersonTabWeChatId" : "WeChat ID",
+    "myAcPersonTabBtnUpdateInfo" : "Update Info",
+
+    "myAcPasswordEmail" : "Email",
+    "myAcPasswordCaptcha" : "Captcha",
+    "myAcPasswordBtnVC" : "Validate Code",
+    "myAcPasswordOld" : "Old Password",
+    "myAcPasswordNew" : "New Password",
+    "myAcPasswordConfirm" : "Confirm Password",
+    "myAcPasswordBtnRP" : "Reset Password",
+
+    "myAcSPYourPlan" : "Your Plan",
+    "myAcSPCS" : "Cancelled Subscription",
+    "myAcSPEditPlan" : "Edit Plan",
+    "myAcSPPlanCancelled" : "Plan Cancelled",
+
+    "myAcEPYourPlan" : "Your Plan",
+    "myAcEPCS" : "Cancelled Subscription",
+    "myAcEPEditPlan" : "Edit Plan",
+    "myAcEPPlanCancelled" : "Plan Cancelled",
+
+    "myAcBHBillingDt" : "Billing Date",
+    "myAcBHBillingYourPlan" : "Your Plan",
+
+    "drawerHomeLb" : "Home",
+    "drawerMyAccountLb" : "My Account",
+    "drawerMyPartsAndFitmentLb" : "My Parts & Fitment",
+    "drawerThemeLb" : "Theme",
+    "drawerLogoutLb" : "Logout",
+
+    "dialogTitleLogoutLb" : "Logout",
+    "dialogMsgLogoutLb" : "Are you sure you want to logout this app ?",
+    "dialogBtnYesLogoutLb" : "Yes",
+    "dialogBtnNoLogoutLb" : "No"
+}

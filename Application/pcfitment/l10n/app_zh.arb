@@ -1,0 +1,79 @@
+{
+  "@@locale": "zh",
+  "helloUser": "你好，{username}！",
+
+  "loginUserNameLb": "用户电子邮件",
+  "loginPasswordLb": "密码",
+  "loginBtnLb": "登录",
+
+  "dashToolBarTitle": "仪表盘",
+  "dashMyPlanLb": "我的计划",
+
+  "dashFitInfoLb": "适配信息",
+  "dashFitInfoTlPartsLb": "总零件数",
+  "dashFitInfoTlFitmentLb": "总适配数",
+  "dashFitInfoTlPartTypeLb": "总零件类型数",
+  "dashFitInfoTlCollectionLb": "总收藏数",
+  "dashFitInfoTlCollectionWithoutPartLb": "不含零件的总收藏数",
+  "dashFitInfoTlUniversalPartLb": "总通用零件数",
+
+  "dashUpdateFitInfoLb": "自上次数据提交以来更新的信息",
+  "dashUpdateFitInfoTlPartsLb": "总零件数",
+  "dashUpdateFitInfoTlFitmentLb": "总适配数",
+  "dashUpdateFitInfoTlPartTypeLb": "总零件类型数",
+
+  "dashMostRecentExportLb": "最近导出",
+  "dashMostRecentExportDtLb": "导出日期",
+  "dashMostRecentExportTypeLb": "导出类型",
+
+  "dialogTitleMlAcLb": "添加多个帐户",
+  "dialogMsgMlMsgLb": "您确定要在此应用程序中添加多个帐户吗？",
+  "dialogBtnMlYesLb": "取消",
+  "dialogBtnMlNoLb": "添加",
+
+  "myAcToolbarTitle": "我的账户",
+  "myAcPersonTabLb": "个人信息",
+  "myAcPasswordTabLb": "密码",
+  "myAcSubscriptionPlanTabLb": "订阅计划",
+  "myAcEbayPlanTabLb": "易趣计划",
+  "myAcBillingHistoryTabLb": "账单记录",
+
+  "myAcPersonTabFirstName": "名",
+  "myAcPersonTabLastName": "姓",
+  "myAcPersonTabEmail": "邮箱",
+  "myAcPersonTabPhoneNo": "电话号码",
+  "myAcPersonTabWeChatId": "微信号",
+  "myAcPersonTabBtnUpdateInfo": "更新信息",
+
+  "myAcPasswordEmail": "邮箱",
+  "myAcPasswordCaptcha": "验证码",
+  "myAcPasswordOld" : "旧密码",
+  "myAcPasswordNew" : "新密码",
+  "myAcPasswordConfirm" : "确认密码",
+  "myAcPasswordBtnVC": "验证代码",
+  "myAcPasswordBtnRP": "重置密码",
+
+  "myAcSPYourPlan": "您的计划",
+  "myAcSPCS": "已取消订阅",
+  "myAcSPEditPlan": "编辑计划",
+  "myAcSPPlanCancelled": "计划已取消",
+
+  "myAcEPYourPlan": "您的计划",
+  "myAcEPCS": "已取消订阅",
+  "myAcEPEditPlan": "编辑计划",
+  "myAcEPPlanCancelled": "计划已取消",
+
+  "myAcBHBillingDt": "账单日期",
+  "myAcBHBillingYourPlan": "您的计划",
+
+  "drawerHomeLb": "首页",
+  "drawerMyAccountLb": "我的帐户",
+  "drawerMyPartsAndFitmentLb" : "我的零件和配件",
+  "drawerThemeLb": "主题",
+  "drawerLogoutLb": "登出",
+
+  "dialogTitleLogoutLb": "退出登录",
+  "dialogMsgLogoutLb": "您确定要退出此应用程序吗？",
+  "dialogBtnYesLogoutLb": "是",
+  "dialogBtnNoLogoutLb": "否"
+}

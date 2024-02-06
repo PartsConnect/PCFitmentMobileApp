@@ -1,0 +1,36 @@
+//String baseURL = "http://198.251.74.218/PCAPI/api/v1/"; // Swagger Live
+//String baseURL = "http://192.168.0.61/PCFitmentAPI/api/v1/"; // Local
+
+String baseURL = "http://app.pcfitment.com/api/v1/"; // Client Live
+
+String loginURL = "${baseURL}authentication";
+String getUserDetailsUrl = "${baseURL}gettenantdetails";
+String editUserDetailsUrl = "${baseURL}edittenantdetails";
+String resetPasswordUrl = "${baseURL}resetpassword";
+String getPlanDetailsUrl = "${baseURL}gettenantplandetails";
+String getFitmentSummaryUrl = "${baseURL}getfitmentssummary";
+String getMostRecentExportUrl = "${baseURL}getmostrecentexport";
+String getMyPartsAndFitmentUrl = "${baseURL}getmypartsandfitment";
+//String getMyPartsAndFitmentInfoUrl = "${baseURL}getpartinformation";
+String getSavedMyPartsAndFitmentUrl = "${baseURL}getsavedfitments";
+String getErrorMyPartsAndFitmentUrl = "${baseURL}geterrorfitments";
+String getLanguagesUrl = "${baseURL}getlanguages";
+String getLanguagesWiseDetailsUrl = "${baseURL}getlanguagewiselabels";
+String getBillingHistoryDetailsUrl = "${baseURL}getbillinghistory";
+String getNotificationHistoryDetailsUrl = "${baseURL}getnotificationhistory";
+String deleteNotificationUrl = "${baseURL}deletenotificationhistory";
+String logoutUrl = "${baseURL}deactivatedeviceid";
+String videoUrl = "${baseURL}gethelpvideosdetails";
+String batchUploadCheckStatusUrl = "${baseURL}getfitmentsuploaddetails";
+String batchUploadUrl = "${baseURL}getfitmentslastuploadedfiles";
+String brandAmazonUrl = "${baseURL}getbrandsforamazon";
+String getSubmitToAmazonUrl = "${baseURL}getheaderdetailsforamazon";
+String updateSubmitToAmazonUrl = "${baseURL}submittoamazon";
+String updateSubmitToAmazonVerificationUrl = "${baseURL}submittoamazonverification";
+String brandWalmartUrl = "${baseURL}getbrandsforwalmart";
+String getSubmitToWalmartUrl = "${baseURL}getheaderdetailsforwalmart";
+String updateSubmitToWalmartUrl = "${baseURL}submittowalmart";
+String dashboardUrl = "${baseURL}getdashboardrequireddata";
+String batchUploadAddDataUrl = "${baseURL}addfitments";
+String getSubmiteBayUrl = "${baseURL}getebaydetails";
+String updateSubmiteBayUrl = "${baseURL}submittoebay";

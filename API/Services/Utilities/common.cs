@@ -50,26 +50,20 @@ namespace TestRestAPI.Models.Utilities
             string physicalPath = Convert.ToString(configuration.GetSection("PhysicalPath").GetSection("DefaultPhysicalPath").Value);
             return physicalPath;
         }
-        //Invoice Static File
-        public static string GetInvoiceStaticFile()
-        {
-            var configuration = GetConfiguration();
-            string InvoiceStaticFile = Convert.ToString(configuration.GetSection("InvoiceStaticFile").GetSection("DefaultInvoiceStaticFile").Value);
-            return InvoiceStaticFile;
-        }
-        //Stripe Secret Key
-        public static string GetStripeSecretKey()
-        {
-            var configuration = GetConfiguration();
-            string StripeSecretKey = Convert.ToString(configuration.GetSection("StripeSecretKey").GetSection("DefaultStripeSecretKey").Value);
-            return StripeSecretKey;
-        }
         //Firebase Server Key
         public static string GetFirebaseServerkey()
         {
             var configuration = GetConfiguration();
             string FirebaseServerkey = Convert.ToString(configuration.GetSection("FirebaseServerkey").GetSection("DefaultFirebaseServerkey").Value);
             return FirebaseServerkey;
+        }
+
+        //Get Stripe Secret Key
+        public static string GetStripeSecretKey()
+        {
+            var configuration = GetConfiguration();
+            string StripeSecretKey = Convert.ToString(configuration.GetSection("StripeSecretKey").GetSection("DefaultStripeSecretKey").Value);
+            return StripeSecretKey;
         }
 
         //Ebay Login Req time

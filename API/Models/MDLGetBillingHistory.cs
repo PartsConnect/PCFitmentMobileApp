@@ -10,18 +10,12 @@ namespace PCFitment_API.Models
         public string FitmentTenantSubscriptionsID { get; set; }
         public string PaymentProvider { get; set; }
         public string Amount { get; set; }
-        public string InvoiceUrl { get; set; }
+        public string StripeInvoiceId { get; set; }
 
     }
 
-    //public class MDLGetBillingHistoryInfo
-    //{
-    //    public List<MDLGetBillingHistory> mdlGetBillingHistoryList { get; set; }
-
-    //    public MDLGetBillingHistoryInfo()
-    //    {
-    //        mdlGetBillingHistoryList = new List<MDLGetBillingHistory>();
-    //    }
-
-    //}
+    public class MDLDownloadInvoice
+    {
+        public string InvoicePDFURL { get; set; }
+    }
 }

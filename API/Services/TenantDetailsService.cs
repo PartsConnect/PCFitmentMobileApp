@@ -1,11 +1,12 @@
 ﻿using Dapper;
 using PartsConnectWebTools.Helpers;
-using PartsConnectWebTools.Models.Custom;
 using PCFitment_API.Models;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using TestRestAPI.Models.Utilities;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace PCFitment_API.Services
 {
@@ -927,7 +928,7 @@ namespace PCFitment_API.Services
                                     FitmentTenantSubscriptionsID = reader["FitmentTenantSubscriptionsID"] is DBNull ? string.Empty : reader["FitmentTenantSubscriptionsID"].ToString(),
                                     PaymentProvider = reader["PaymentProvider"] is DBNull ? string.Empty : reader["PaymentProvider"].ToString(),
                                     Amount = reader["Amount"] is DBNull ? string.Empty : reader["Amount"].ToString(),
-                                    InvoiceUrl = DownloadInvoice(reader.GetInt64(reader.GetOrdinal("FitmentTenantSubscriptionsID")), tenantID)
+                                    StripeInvoiceId = reader["StripeInvoiceId"] is DBNull ? string.Empty : reader["StripeInvoiceId"].ToString()
                                 };
                                 mDLGetBillingsMain.Add(getBillingsSub);
                             }
@@ -1040,20 +1041,84 @@ namespace PCFitment_API.Services
 
             return IsMatched;
         }
-        public string DownloadInvoice(long subsid, int tenantID)
+
+
+        public async Task<string> DownloadInvoice(string StripeInvoiceId = "")
         {
-            //TenantsSubscriptionModel subs_details = TenantsSubscriptionHelper.GetUserSubscriptionByID(Convert.ToInt32(subsid), tenantID);
             string InvoiceUrl = "";
-            //string secret = commonMethods.GetStripeSecretKey();
+            string msg = "";
+            string msgCode = "";
 
-            //var api = new StripeWrapper.StripeWrapper(secret);
-            //InvoiceUrl = api.GetInvoicePDFURL(subs_details.CustomerID, subs_details.SubscriptionID, subs_details.StripeInvoiceId, subs_details.ActiveDate, subs_details.BillingAmount, subs_details.StripePlanID);
+            // Check if StripeInvoiceId is provided
+            if (string.IsNullOrEmpty(StripeInvoiceId))
+            {
+                msg = "StripeInvoiceId is empty or null.";
+                msgCode = "F"; // Example status code for bad request
+                return $"{InvoiceUrl}~{msgCode}~{msg}";
+            }
 
-            string StaticInvoiceUrl =  commonMethods.GetInvoiceStaticFile();
-            InvoiceUrl = StaticInvoiceUrl;
+            // Get your Stripe API key from a method
+            string apiKey = commonMethods.GetStripeSecretKey();
 
-            return InvoiceUrl;
+            // Check if apiKey is null or empty
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                msg = "Stripe API key is null or empty. Please check your API key configuration.";
+                msgCode = "F"; // Example status code for unauthorized
+                return $"{InvoiceUrl}~{msgCode}~{msg}";
+            }
+
+            try
+            {
+                // Construct the API endpoint URL
+                string apiUrl = $"https://api.stripe.com/v1/invoices/{StripeInvoiceId}";
+
+                // Initialize HttpClient
+                using (HttpClient client = new HttpClient())
+                {
+                    // Set Authorization header with Stripe API key
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", apiKey);
+
+                    // Send GET request to Stripe API
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    // Check if request was successful
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Read response content
+                        string jsonResponse = await response.Content.ReadAsStringAsync();
+
+                        // Deserialize JSON response
+                        dynamic invoiceObj = Newtonsoft.Json.JsonConvert.DeserializeObject(jsonResponse);
+
+                        // Retrieve the PDF URL from the invoice object
+                        if (invoiceObj != null && invoiceObj.invoice_pdf != null)
+                        {
+                            InvoiceUrl = invoiceObj.invoice_pdf.ToString();
+                            msg = "Invoice PDF URL retrieved successfully.";
+                            msgCode = "S";
+                        }
+                        else
+                        {
+                            msg = "Invoice PDF URL not found in API response.";
+                            msgCode = "F";
+                        }
+                    }
+                    else
+                    {
+                        msg = $"Failed to retrieve invoice details. Status Code: {response.StatusCode}";
+                        msgCode = "F";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                msg = $"Error: {ex.Message}";
+                msgCode = "F";
+            }
+
+            // Format the return message with '~' separator
+            return $"{InvoiceUrl}~{msgCode}~{msg}";
         }
-
     }
 }

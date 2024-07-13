@@ -2543,11 +2543,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\PCFitment_API\\PCFitment_API.csproj",
+      "projectUniqueName": "F:\\Working-Project\\PCFitmentMobileApp\\API\\PCFitment_API.csproj",
       "projectName": "PCFitment_API",
-      "projectPath": "C:\\Users\\ADMIN\\Desktop\\PCFitment_API\\PCFitment_API.csproj",
+      "projectPath": "F:\\Working-Project\\PCFitmentMobileApp\\API\\PCFitment_API.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ADMIN\\Desktop\\PCFitment_API\\obj\\",
+      "outputPath": "F:\\Working-Project\\PCFitmentMobileApp\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2558,6 +2558,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2570,6 +2571,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -2632,6 +2638,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[7.0.20, 7.0.20]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[7.0.20, 7.0.20]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[7.0.20, 7.0.20]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[7.0.20, 7.0.20]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -2640,7 +2664,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303\\RuntimeIdentifierGraph.json"
       }
     }
   },
@@ -2660,16 +2684,6 @@
       "level": "Warning",
       "warningLevel": 1,
       "message": "Package 'System.IdentityModel.Tokens.Jwt' 6.23.1 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-59j7-ghrg-fj52",
-      "libraryId": "System.IdentityModel.Tokens.Jwt",
-      "targetGraphs": [
-        "net7.0"
-      ]
-    },
-    {
-      "code": "NU1902",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'System.IdentityModel.Tokens.Jwt' 6.23.1 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-8g9c-28fc-mcx2",
       "libraryId": "System.IdentityModel.Tokens.Jwt",
       "targetGraphs": [
         "net7.0"

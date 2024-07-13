@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.Xml;
 
 namespace PCFitment_API.Controllers.v1
 {
@@ -247,6 +248,51 @@ namespace PCFitment_API.Controllers.v1
                 if (data != null)
                 {
                     response = Ok(new { StatusCode = (int)HttpStatusCode.OK, Status = HttpStatusCode.OK.ToString(), Pagesize = IMPageSize, CurrentPage = IMpageNumber, totalRecords = totalRecords, totalPages = totalPages, Message = Messages.CON_Success, data });
+                }
+                else
+                {
+                    response = Ok(new { StatusCode = (int)HttpStatusCode.NoContent, Status = HttpStatusCode.NoContent.ToString(), Message = Messages.CON_No_Data_Found, data });
+                }
+            }
+            catch (Exception ex)
+            {
+                response = Ok(new { StatusCode = (int)HttpStatusCode.InternalServerError, Status = HttpStatusCode.InternalServerError.ToString(), Message = ex.Message + ", Please contact to system admin", data });
+            }
+
+            return response;
+        }
+
+        [Authorize]
+        [HttpGet("DownloadInvoice")]
+        public async Task<IActionResult> DownloadInvoice([FromQuery] string StripeInvoiceId = "")
+        {
+            MDLDownloadInvoice data = new MDLDownloadInvoice();
+            string result = "";
+
+            IActionResult response = Unauthorized();
+            try
+            {
+                result = await _tenantDetailsService.DownloadInvoice(StripeInvoiceId);
+
+                if (!string.IsNullOrWhiteSpace(result))
+                {
+                    string[] responseArr = result.Split('~');
+                    string PDFURL = responseArr[0];
+                    if (!string.IsNullOrEmpty(PDFURL))
+                    {
+                        data.InvoicePDFURL = PDFURL;
+                    }
+                    string msgCode = responseArr[1];
+                    string msg = responseArr[2];
+
+                    if (msgCode.ToLower() == "s")
+                    {
+                        response = Ok(new { StatusCode = (int)HttpStatusCode.OK, Status = HttpStatusCode.OK.ToString(), Message = Messages.CON_Success, data });
+                    }
+                    else if (msgCode.ToLower() == "f")
+                    {
+                        response = Ok(new { StatusCode = (int)HttpStatusCode.NoContent, Status = HttpStatusCode.NoContent.ToString(), Message = msg, data });
+                    }
                 }
                 else
                 {

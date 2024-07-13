@@ -110,23 +110,40 @@ namespace PartsConnectWebTools.Helpers
         {
             //IEnumerable<MDLGetBillingHistory> Payment;
             string Query = @"
-                             SELECT * FROM (
-                             SELECT FitmentTenantSubscriptionsID, ActivationDate AS ActiveDate,
-                                         CASE WHEN ISNULL(BillingAmount,0)=0 THEN 'Trial - Up to 10 SKUs' 
-                                         WHEN ISNULL(BillingAmount,0)=10 THEN 'Basic Plan – Up to 100 SKUs' 
-                             			WHEN ISNULL(BillingAmount,0)=15 THEN 'Basic Plan – Up to 100 SKUs' 
-                                         ELSE 'Tiered Plan – Up to '+CAST(BillingAmount*20 AS VARCHAR)+' SKUs' END AS PlanName,
-                                         '$'+CAST(ISNULL(BillingAmount,0)AS VARCHAR(50)) AS 'Amount',
-                                         CASE WHEN ISNULL(SubscriptionID,'')!='' THEN 'Stripe' ELSE 'Paypal' END AS PaymentProvider
-                                         FROM tools.FitmentTenantSubscriptions 
-                                         WHERE TenantID=@TenantID 
-                             			UNION
-                             SELECT DISTINCT id AS FitmentTenantSubscriptionsID, ActivationDate AS ActiveDate,
-                                         'eBay Plan Up to '+CAST(CAST(ISNULL(BillingAmount,0) AS INT) * 50 AS VARCHAR)+' SKUs'   AS PlanName,
-                                         '$'+CAST(ISNULL(BillingAmount,0)AS VARCHAR(50)) AS 'Amount',
-                                         CASE WHEN ISNULL(SubscriptionID,'')!='' THEN 'Stripe' ELSE 'Paypal' END AS PaymentProvider
-                                         FROM tools.eBayTenantSubscriptions 
-                                         WHERE TenantID=@TenantID ) AS t ORDER BY FitmentTenantSubscriptionsID DESC ";
+                             SELECT *
+                                FROM (
+                                    SELECT FitmentTenantSubscriptionsID, 
+                                           ActivationDate AS ActiveDate,
+                                           CASE 
+                                               WHEN ISNULL(BillingAmount, 0) = 0 THEN 'Trial - Up to 10 SKUs'
+                                               WHEN ISNULL(BillingAmount, 0) = 10 THEN 'Basic Plan – Up to 100 SKUs'
+                                               WHEN ISNULL(BillingAmount, 0) = 15 THEN 'Basic Plan – Up to 100 SKUs'
+                                               ELSE 'Tiered Plan – Up to ' + CAST(BillingAmount * 20 AS VARCHAR(50)) + ' SKUs'
+                                           END AS PlanName,
+                                           '$' + CAST(ISNULL(BillingAmount, 0) AS VARCHAR(50)) AS Amount,
+                                           CASE 
+                                               WHEN ISNULL(SubscriptionID, '') != '' THEN 'Stripe'
+                                               ELSE 'Paypal'
+                                           END AS PaymentProvider, 
+                                           StripeInvoiceId
+                                    FROM tools.FitmentTenantSubscriptions 
+                                    WHERE TenantID = @TenantID 
+                                      AND (StripeInvoiceId IS NOT NULL AND StripeInvoiceId != '')
+                                    UNION
+                                    SELECT DISTINCT id AS FitmentTenantSubscriptionsID,
+                                           ActivationDate AS ActiveDate,
+                                           'eBay Plan Up to ' + CAST(CAST(ISNULL(BillingAmount, 0) AS INT) * 50 AS VARCHAR(50)) + ' SKUs' AS PlanName,
+                                           '$' + CAST(ISNULL(BillingAmount, 0) AS VARCHAR(50)) AS Amount,
+                                           CASE 
+                                               WHEN ISNULL(SubscriptionID, '') != '' THEN 'Stripe'
+                                               ELSE 'Paypal'
+                                           END AS PaymentProvider, 
+                                           StripeInvoiceId
+                                    FROM tools.eBayTenantSubscriptions 
+                                    WHERE TenantID = @TenantID
+                                      AND (StripeInvoiceId IS NOT NULL AND StripeInvoiceId != '')
+                                ) AS t 
+                                ORDER BY FitmentTenantSubscriptionsID DESC ";
 
             if (!IsCount)
             {

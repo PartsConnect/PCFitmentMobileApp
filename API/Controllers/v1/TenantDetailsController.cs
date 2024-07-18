@@ -323,7 +323,7 @@ namespace PCFitment_API.Controllers.v1
                 }
                 else
                 {
-                    response = Ok(new { StatusCode = (int)HttpStatusCode.NoContent, Status = HttpStatusCode.NoContent.ToString(), Message = Messages.CON_No_Data_Found, data });
+                    response = Ok(new { StatusCode = (int)HttpStatusCode.NoContent, Status = HttpStatusCode.NoContent.ToString(), Message = Messages.CON_No_Notification, data });
                 }
             }
             catch (Exception ex)

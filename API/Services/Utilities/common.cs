@@ -459,16 +459,19 @@ namespace TestRestAPI.Models.Utilities
     public class Messages
     {
         //Common
-        public const string CON_Login_Success = "Login Successfully!";
-        public const string CON_Login_Invalid = "Invalid Credential!";
-        public const string CON_Success = "Operation Completed Successfully!";
-        public const string CON_Edit_Data = "Data Updated Successfully!";
-        public const string CON_Logout_Success = "Logout Successfully!";
-        public const string CON_Valid_Customer_Id = "Please Provide Valid Customer Id!";
-        public const string CON_No_Data_Found = "No Records Found!";
-        public const string CON_No_Files_Found = "No Files Found!";
-        public const string CON_Help_Videos = "Fetched Successfully!";
-        public const string CON_Notification = "Notification Sent Successfully!";
+        public const string CON_Login_Success = "Login successful!";
+        public const string CON_Login_Invalid = "Invalid credentials!";
+        public const string CON_Success = "Operation completed successfully!";
+        public const string CON_Edit_Data = "Data updated successfully!";
+        public const string CON_Logout_Success = "Logout successful!";
+        public const string CON_Valid_Customer_Id = "Please provide a valid Customer Id!";
+        public const string CON_No_Data_Found = "No records found.";
+        public const string CON_No_More_Data_Found = "Oops, no more records found.";
+        public const string CON_No_Files_Found = "No files found.";
+        public const string CON_Help_Videos = "Videos fetched successfully!";
+        public const string CON_Notification = "Notification sent successfully!";
+        public const string CON_No_Notification = "No notifications found.";
+
     }
 
 }

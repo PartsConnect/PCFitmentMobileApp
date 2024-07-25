@@ -25,7 +25,7 @@ namespace PCFitment_API.Services
             {
                 connection.Open();
                 stbSqlCommand.Clear();
-                stbSqlCommand.Append("SELECT ID,(FirstName + ' ' + LastName) AS FullName FROM [tools].[Tenants] where Email ='" + tenant.Email + "'COLLATE Latin1_General_CS_AS AND [password] = '" + commonMethods.DecryptPassword(tenant.Password) + "'COLLATE Latin1_General_CS_AS");
+                stbSqlCommand.Append("SELECT ID,(FirstName + ' ' + LastName) AS FullName FROM [tools].[Tenants] where Email ='" + tenant.Email + "' AND [password] = '" + commonMethods.DecryptPassword(tenant.Password) + "'COLLATE Latin1_General_CS_AS");
 
                 using (SqlCommand command = new SqlCommand(stbSqlCommand.ToString(), connection))
                 {

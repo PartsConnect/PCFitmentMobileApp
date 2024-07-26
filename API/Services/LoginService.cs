@@ -70,7 +70,7 @@ namespace PCFitment_API.Services
             {
                 try
                 {
-                    string Query = @" UPDATE [dbo].[App_Settings] SET FCMToken = @FCMToken, ISActive = 0, IsTermsAndConditionAccept = @IsTermsAndConditionAccept, IsPrivacyPolicyAccept = @IsPrivacyPolicyAccept WHERE TenantID = @TenantID AND DeviceID = @DeviceID ;";
+                    string Query = @" UPDATE [dbo].[App_Settings] SET FCMToken = @FCMToken, ISActive = 1, IsTermsAndConditionAccept = @IsTermsAndConditionAccept, IsPrivacyPolicyAccept = @IsPrivacyPolicyAccept WHERE TenantID = @TenantID AND DeviceID = @DeviceID ;";
                     using (var conn = new SqlConnection(connectionString))
                     {
                         conn.Open();

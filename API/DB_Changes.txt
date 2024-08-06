@@ -1,0 +1,29 @@
+------------------------------------------
+-- Name : Bhavesh D. Rathod
+-- Date : 06/08/2024
+-- Note : For bifurcation of various devices
+
+-- Check if 'WhichDevice' column exists
+IF COL_LENGTH('[dbo].[App_Settings]', 'WhichDevice') IS NULL
+BEGIN
+    ALTER TABLE [dbo].[App_Settings] 
+    ADD WhichDevice VARCHAR(50) NULL;
+    PRINT 'Column WhichDevice INSERTED';
+END
+ELSE
+BEGIN
+    PRINT 'Column WhichDevice already exists';
+END
+
+-- Check if 'ModelName' column exists
+IF COL_LENGTH('[dbo].[App_Settings]', 'ModelName') IS NULL
+BEGIN
+    ALTER TABLE [dbo].[App_Settings] 
+    ADD ModelName VARCHAR(500) NULL;
+    PRINT 'Column ModelName INSERTED';
+END
+ELSE
+BEGIN
+    PRINT 'Column ModelName already exists';
+END
+--------------------------------------------------------

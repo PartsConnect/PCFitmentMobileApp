@@ -200,7 +200,6 @@ namespace PCFitment_API.Controllers.v1
             return response;
         }
 
-        [Authorize]
         [HttpGet("GetDashboardRequiredData")]
         public IActionResult GetDashboardRequiredData([FromQuery] string tenantID)
         {

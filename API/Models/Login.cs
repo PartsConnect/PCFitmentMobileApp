@@ -9,6 +9,8 @@ namespace PCFitment_API.Models
         public string Password { get; set; }
         public string FCMToken { get; set; } = string.Empty;
         public string DeviceID { get; set; } = string.Empty;
+        public string WhichDevice { get; set; } = string.Empty;
+        public string ModelName { get; set; } = string.Empty;
         public string IsTermsAndConditionAccept { get; set; } = string.Empty;
         public string IsPrivacyPolicyAccept { get; set; } = string.Empty;
     }

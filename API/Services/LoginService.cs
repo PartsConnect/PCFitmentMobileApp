@@ -44,12 +44,12 @@ namespace PCFitment_API.Services
             return mstrtenantID + "~" + mstrtenantName;
         }
 
-        public int SaveFCMToken(int PRtenantId, string PRFCMToken = "", string PRDeviceID = "", string PRIsTermsAndConditionAccept = "0", string PRIsPrivacyPolicyAccept = "0")
+        public int SaveFCMToken(int PRtenantId, string PRFCMToken = "", string PRDeviceID = "", string PRWhichDevice = "",string PRModelName = "", string PRIsTermsAndConditionAccept = "0", string PRIsPrivacyPolicyAccept = "0")
         {
             if (!IsFCMTokenExists(PRtenantId, PRDeviceID))
             {
                 int InsertedID = 0;
-                string Query = @" INSERT INTO [dbo].[App_Settings] (TenantID, FCMToken, DeviceID, IsTermsAndConditionAccept, IsPrivacyPolicyAccept) VALUES (@TenantID, @FCMToken, @DeviceID, @IsTermsAndConditionAccept, @IsPrivacyPolicyAccept) 
+                string Query = @" INSERT INTO [dbo].[App_Settings] (TenantID, FCMToken, DeviceID, WhichDevice, ModelName, IsTermsAndConditionAccept, IsPrivacyPolicyAccept) VALUES (@TenantID, @FCMToken, @DeviceID, @WhichDevice, @ModelName, @IsTermsAndConditionAccept, @IsPrivacyPolicyAccept) 
                                   SELECT CAST(SCOPE_IDENTITY() as int)";
                 using (var conn = new SqlConnection(connectionString))
                 {
@@ -59,6 +59,8 @@ namespace PCFitment_API.Services
                         TenantID = PRtenantId,
                         FCMToken = PRFCMToken,
                         DeviceID = PRDeviceID,
+                        WhichDevice = PRWhichDevice,
+                        ModelName = PRModelName,
                         IsTermsAndConditionAccept = commonMethods.IsTermsAndConditionAccept(PRDeviceID, Convert.ToBoolean(PRIsTermsAndConditionAccept)),
                         IsPrivacyPolicyAccept = commonMethods.IsPrivacyPolicyAccept(PRDeviceID, Convert.ToBoolean(PRIsPrivacyPolicyAccept))
                     }).FirstOrDefault();
@@ -70,7 +72,7 @@ namespace PCFitment_API.Services
             {
                 try
                 {
-                    string Query = @" UPDATE [dbo].[App_Settings] SET FCMToken = @FCMToken, ISActive = 1, IsTermsAndConditionAccept = @IsTermsAndConditionAccept, IsPrivacyPolicyAccept = @IsPrivacyPolicyAccept WHERE TenantID = @TenantID AND DeviceID = @DeviceID ;";
+                    string Query = @" UPDATE [dbo].[App_Settings] SET FCMToken = @FCMToken, WhichDevice = @WhichDevice, ModelName = @ModelName, ISActive = 1, IsTermsAndConditionAccept = @IsTermsAndConditionAccept, IsPrivacyPolicyAccept = @IsPrivacyPolicyAccept WHERE TenantID = @TenantID AND DeviceID = @DeviceID ;";
                     using (var conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
@@ -79,6 +81,8 @@ namespace PCFitment_API.Services
                             TenantID = PRtenantId,
                             FCMToken = PRFCMToken,
                             DeviceID = PRDeviceID,
+                            WhichDevice = PRWhichDevice,
+                            ModelName = PRModelName,
                             IsTermsAndConditionAccept = commonMethods.IsTermsAndConditionAccept(PRDeviceID,Convert.ToBoolean(PRIsTermsAndConditionAccept)),
                             IsPrivacyPolicyAccept = commonMethods.IsPrivacyPolicyAccept(PRDeviceID, Convert.ToBoolean(PRIsPrivacyPolicyAccept))
                         });
@@ -114,8 +118,6 @@ namespace PCFitment_API.Services
         }
 
         #endregion End Authentication Query
-
-        //-------------------------------------//
 
     }
 }

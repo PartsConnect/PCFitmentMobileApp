@@ -69,7 +69,7 @@ namespace PCFitment_API.Controllers.v1
                     var token = GenrateToken(tenant, Convert.ToInt32(mstrtenantID));
                     if (!string.IsNullOrEmpty(tenant.FCMToken) && !string.IsNullOrEmpty(tenant.DeviceID))
                     {
-                        RecordId = _loginService.SaveFCMToken(mstrtenantID, tenant.FCMToken, tenant.DeviceID, tenant.IsTermsAndConditionAccept, tenant.IsPrivacyPolicyAccept);
+                        RecordId = _loginService.SaveFCMToken(mstrtenantID, tenant.FCMToken, tenant.DeviceID, tenant.WhichDevice, tenant.ModelName, tenant.IsTermsAndConditionAccept, tenant.IsPrivacyPolicyAccept);
                         if (RecordId <= 0)
                         {
                             tenant.FCMToken = string.Empty;

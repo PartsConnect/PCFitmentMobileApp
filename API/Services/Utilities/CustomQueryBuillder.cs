@@ -224,7 +224,7 @@ IF EXISTS (SELECT * FROM   INFORMATION_SCHEMA.TABLES WHERE  TABLE_NAME = 'Parts_
                 if (commonMethods.IsBrandShowMenu(TenantID))
                 {
                     stbSqlQuery.Append(@" SELECT DISTINCT  COUNT(*) over () AS Total, p.PartTerminologyName AS PartTypeName ,ISNULL(F.isinvalid,0) AS  Isinvalid ,p1.ID,p1.PartTerminologyID,
-                             p1.ASIN,p1.ManufactureLabel,p1.PartTerminologyID,p1.BrandID,p1.PartDescription,p1.TenantID,p1.PartNumber,p1.collectionId,p1.IsAmazonFit FROM " + PartTableName + @" p1 
+                             p1.ASIN,p1.ManufactureLabel,p1.PartTerminologyID,p1.BrandID,p1.PartDescription,p1.TenantID,p1.PartNumber,p1.collectionId,p1.IsAmazonFit,p1.ParentPartID AS ParentPart FROM " + PartTableName + @" p1 
                              JOIN Parts p ON p1.PartTerminologyID = p.PartTerminologyID  
                         INNER JOIN (SELECT DISTINCT PartID,isinvalid,IsDeleted FROM  " + fitmentTableName + @" WHERE ISNULL(isinvalid,0) =1 AND ISNULL(Action,'''') =''A'')
                            F ON F.PartID=p1.ID 
@@ -234,7 +234,7 @@ IF EXISTS (SELECT * FROM   INFORMATION_SCHEMA.TABLES WHERE  TABLE_NAME = 'Parts_
                     stbSqlQuery.Append("  OR (PartTerminologyName LIKE ''%" + LikeOptions + "%'') ");
                     stbSqlQuery.Append("  OR (BrandID LIKE ''%" + LikeOptions + "%'') ");
                     stbSqlQuery.Append("  OR (p1.PartTerminologyID LIKE ''%" + LikeOptions + "%'') ");
-                    stbSqlQuery.Append(" ) ORDER BY ID ");
+                    stbSqlQuery.Append(" ) ORDER BY ID DESC ");
 
                     if (!IsCount)
                     {
@@ -244,7 +244,7 @@ IF EXISTS (SELECT * FROM   INFORMATION_SCHEMA.TABLES WHERE  TABLE_NAME = 'Parts_
                 else
                 {
                     stbSqlQuery.Append(@" SELECT DISTINCT  COUNT(*) over () AS Total, p.PartTerminologyName AS PartTypeName ,ISNULL(F.isinvalid,0) AS  Isinvalid ,p1.ID,p1.PartTerminologyID,
-                             p1.ASIN,p1.ManufactureLabel, p1.PartTerminologyID, p1.BrandID, p1.PartDescription,p1.TenantID,p1.PartNumber,p1.collectionId,p1.IsAmazonFit FROM " + PartTableName + @" p1 
+                             p1.ASIN,p1.ManufactureLabel, p1.PartTerminologyID, p1.BrandID, p1.PartDescription,p1.TenantID,p1.PartNumber,p1.collectionId,p1.IsAmazonFit, p1.ParentPartID AS ParentPart FROM " + PartTableName + @" p1 
                              JOIN Parts p ON p1.PartTerminologyID = p.PartTerminologyID  
                         INNER JOIN (SELECT DISTINCT PartID,isinvalid,IsDeleted FROM  " + fitmentTableName + @" WHERE ISNULL(isinvalid,0) =1 AND ISNULL(Action,'''') =''A'')
                            F ON F.PartID=p1.ID 
@@ -254,7 +254,7 @@ IF EXISTS (SELECT * FROM   INFORMATION_SCHEMA.TABLES WHERE  TABLE_NAME = 'Parts_
                     stbSqlQuery.Append("  OR (PartTerminologyName LIKE ''%" + LikeOptions + "%'') ");
                     stbSqlQuery.Append("  OR (BrandID LIKE ''%" + LikeOptions + "%'') ");
                     stbSqlQuery.Append("  OR (p1.PartTerminologyID LIKE ''%" + LikeOptions + "%'') ");
-                    stbSqlQuery.Append(" ) ORDER BY ID ");
+                    stbSqlQuery.Append(" ) ORDER BY ID DESC ");
 
                     if (!IsCount)
                     {
@@ -268,7 +268,7 @@ IF EXISTS (SELECT * FROM   INFORMATION_SCHEMA.TABLES WHERE  TABLE_NAME = 'Parts_
                 if (commonMethods.IsBrandShowMenu(TenantID))
                 {
                     stbSqlQuery.Append(@" SELECT DISTINCT  COUNT(*) over () AS Total, p.PartTerminologyName AS PartTypeName, CASE WHEN errorFitment.PartID IS NOT NULL THEN 1 ELSE 0 END IsInvalid, p1.ID,p1.PartTerminologyID,
-                             p1.ASIN,p1.ManufactureLabel,p1.PartTerminologyID,p1.BrandID,p1.PartDescription,p1.TenantID,p1.PartNumber,p1.collectionId,p1.IsAmazonFit FROM " + PartTableName + @" p1
+                             p1.ASIN,p1.ManufactureLabel,p1.PartTerminologyID,p1.BrandID,p1.PartDescription,p1.TenantID,p1.PartNumber,p1.collectionId,p1.IsAmazonFit, p1.ParentPartID AS ParentPart FROM " + PartTableName + @" p1
                 JOIN Parts p ON p1.PartTerminologyID = p.PartTerminologyID
                 LEFT JOIN  (SELECT DISTINCT PartID FROM  " + fitmentTableName + @"  F WHERE TenantID = " + TenantID + @" AND IsInvalid = 1 AND ISNULL(IsDeleted,0)=0 AND ISNULL(Action,'''')=''A'') AS errorFitment ON errorFitment.PartId = P1.ID
                 WHERE p1.TenantID = " + TenantID + @" AND ISNULL(p1.IsDeleted,0)=0 ");
@@ -277,7 +277,7 @@ IF EXISTS (SELECT * FROM   INFORMATION_SCHEMA.TABLES WHERE  TABLE_NAME = 'Parts_
                     stbSqlQuery.Append("  OR (PartTerminologyName LIKE ''%" + LikeOptions + "%'') ");
                     stbSqlQuery.Append("  OR (BrandID LIKE ''%" + LikeOptions + "%'') ");
                     stbSqlQuery.Append("  OR (p1.PartTerminologyID LIKE ''%" + LikeOptions + "%'') ");
-                    stbSqlQuery.Append(" ) ORDER BY ID ");
+                    stbSqlQuery.Append(" ) ORDER BY ID DESC ");
 
                     if (!IsCount)
                     {
@@ -288,7 +288,7 @@ IF EXISTS (SELECT * FROM   INFORMATION_SCHEMA.TABLES WHERE  TABLE_NAME = 'Parts_
                 else
                 {
                     stbSqlQuery.Append(@"SELECT DISTINCT  COUNT(*) over () AS Total, p.PartTerminologyName AS PartTypeName, CASE WHEN errorFitment.PartID IS NOT NULL THEN 1 ELSE 0 END IsInvalid, p1.ID,p1.PartTerminologyID,
-                             p1.ASIN,p1.ManufactureLabel,p1.PartTerminologyID,p1.BrandID, p1.PartDescription,p1.TenantID,p1.PartNumber,p1.collectionId,p1.IsAmazonFit FROM " + PartTableName + @" p1
+                             p1.ASIN,p1.ManufactureLabel,p1.PartTerminologyID,p1.BrandID, p1.PartDescription,p1.TenantID,p1.PartNumber,p1.collectionId,p1.IsAmazonFit,p1.ParentPartID AS ParentPart FROM " + PartTableName + @" p1
                 JOIN Parts p ON p1.PartTerminologyID = p.PartTerminologyID
                 LEFT JOIN  (SELECT DISTINCT PartID FROM  " + fitmentTableName + @"  F WHERE TenantID = " + TenantID + @" AND IsInvalid = 1 AND ISNULL(IsDeleted,0)=0 AND ISNULL(Action,'''')=''A'') AS errorFitment ON errorFitment.PartId = P1.ID
                 WHERE p1.TenantID = " + TenantID + @" AND ISNULL(p1.IsDeleted,0)=0 ");
@@ -297,7 +297,7 @@ IF EXISTS (SELECT * FROM   INFORMATION_SCHEMA.TABLES WHERE  TABLE_NAME = 'Parts_
                     stbSqlQuery.Append("  OR (PartTerminologyName LIKE ''%" + LikeOptions + "%'') ");
                     stbSqlQuery.Append("  OR (BrandID LIKE ''%" + LikeOptions + "%'') ");
                     stbSqlQuery.Append("  OR (p1.PartTerminologyID LIKE ''%" + LikeOptions + "%'') ");
-                    stbSqlQuery.Append(" ) ORDER BY ID ");
+                    stbSqlQuery.Append(" ) ORDER BY ID DESC ");
 
                     if (!IsCount)
                     {
@@ -324,14 +324,14 @@ IF EXISTS (SELECT * FROM   INFORMATION_SCHEMA.TABLES WHERE  TABLE_NAME = 'Parts_
                               IF ISNULL(@flag3, 0) <> 2
                                 BEGIN      
                                 SET @SQLCommand = 'SELECT DISTINCT  COUNT(*) over () AS Total,p.PartTerminologyName AS PartTypeName, 0 AS IsInvalid, p1.ID,p1.PartTerminologyID,
-                             p1.ASIN,p1.ManufactureLabel,p1.PartTerminologyID,p1.PartDescription,p1.TenantID,p1.PartNumber,p1.collectionId,p1.IsAmazonFit FROM " + PartTableName + @" p1 JOIN Parts p ON p1.PartTerminologyID = p.PartTerminologyID
+                             p1.ASIN,p1.ManufactureLabel,p1.PartTerminologyID,p1.PartDescription,p1.TenantID,p1.PartNumber,p1.collectionId,p1.IsAmazonFit,p1.ParentPartID AS ParentPart FROM " + PartTableName + @" p1 JOIN Parts p ON p1.PartTerminologyID = p.PartTerminologyID
                                   WHERE p1.TenantID = " + TenantID + @" AND ISNULL(p1.IsDeleted, 0)= 0 ");
 
             stbSqlQuery.Append("  AND ( (PartNumber LIKE ''%" + LikeOptions + "%'') ");
             stbSqlQuery.Append("  OR (PartTerminologyName LIKE ''%" + LikeOptions + "%'') ");
             stbSqlQuery.Append("  OR (BrandID LIKE ''%" + LikeOptions + "%'') ");
             stbSqlQuery.Append("  OR (p1.PartTerminologyID LIKE ''%" + LikeOptions + "%'') ");
-            stbSqlQuery.Append(" ) ORDER BY ID ");
+            stbSqlQuery.Append(" ) ORDER BY ID DESC ");
 
             if (!IsCount)
             {
@@ -613,6 +613,23 @@ IF EXISTS (SELECT * FROM   INFORMATION_SCHEMA.TABLES WHERE  TABLE_NAME = 'Parts_
             BEGIN
                SELECT Count(ID) FROM  " + tablename + @" WHERE TenantID=" + tenantID + @" AND ISNULL(isDeleted,0) = 0 AND ISNULL(BaseVehicleID,0)>0 AND ISNULL(Action,'')  = 'A' AND ISNULL(isinvalid,0) = 0 ;
             END";
+
+            return Query;
+        }
+
+        public static string BuildQueryForInheritedParts(Int64 PartId, Int64 TenantID)
+        {
+
+            string TableName = "tools.Parts_" + TenantID;
+            string Query = @"";
+            string strOrderby = "ORDER BY ID ";
+
+            Query = @" SELECT T.Id, T.TenantID, T.PartNumber, T.ASIN, T.ManufactureLabel, T.PartDescription, T.BrandID, 
+                              p1.PartNumber AS ParentPartNumber, p2.PartTerminologyName AS PartType FROM " + TableName + @" T INNER JOIN " + TableName + @" 
+                              p1 ON p1.id = T.ParentPartID INNER JOIN Parts p2 ON p2.PartTerminologyID = T.PartTerminologyID
+                              WHERE p1.ID =  " + PartId + @" AND ISNULL(T.IsDeleted,0)=0 AND ISNULL(p1.IsDeleted,0)=0
+                              " + strOrderby + @" ";
+
 
             return Query;
         }

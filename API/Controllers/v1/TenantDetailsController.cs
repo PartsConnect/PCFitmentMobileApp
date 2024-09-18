@@ -200,6 +200,7 @@ namespace PCFitment_API.Controllers.v1
             return response;
         }
 
+        [Authorize]
         [HttpGet("GetDashboardRequiredData")]
         public IActionResult GetDashboardRequiredData([FromQuery] string tenantID)
         {
@@ -353,7 +354,6 @@ namespace PCFitment_API.Controllers.v1
             return response;
         }
 
-        [Authorize]
         [HttpPost("DeActivateDeviceId")]
         public IActionResult DeActivateDeviceId(MDLDeActivateDeviceId deActivateDeviceId)
         {
@@ -372,7 +372,6 @@ namespace PCFitment_API.Controllers.v1
 
             return response;
         }
-
 
     }
 }

@@ -34,6 +34,13 @@ namespace PCFitment_API.Services
             string Query = "";
 
             CustomQueryBuillder.AddUniversalCollectionColumns(tenantID);
+
+            bool IsParentPartcolexist = PartsHelper.checkParentColumn(tenantID);
+            if (IsParentPartcolexist == false)
+            {
+                PartsHelper.AddParantIdcolnm(tenantID);
+            }
+
             Query = CustomQueryBuillder.BuildQueryForParts(item, tenantID, tablename, fitmentTable, IMpageNumber, IMPageSize, searchValue, IsCount);
             using (SqlConnection connection = new SqlConnection(connString))
             {
@@ -62,6 +69,7 @@ namespace PCFitment_API.Services
                                     PartTerminologyID = reader["PartTerminologyID"] is DBNull ? string.Empty : reader["PartTerminologyID"].ToString(),
                                     CollectionID = reader["collectionId"] is DBNull ? string.Empty : reader["collectionId"].ToString(),
                                     IsAmazonFit = reader["IsAmazonFit"] is DBNull ? string.Empty : reader["IsAmazonFit"].ToString(),
+                                    ParentPart = reader["ParentPart"] is DBNull ? string.Empty : reader["ParentPart"].ToString(),
                                     Fitmentsnum = Convert.ToString(MGetAllCount(tenantID, reader["ID"] is DBNull ? string.Empty : reader["ID"].ToString())),
                                     SavedFitmentsCount = Convert.ToString(MGetSavedFitmentsCount(tenantID, reader["ID"] is DBNull ? string.Empty : reader["ID"].ToString())),
                                     ErrorFitmentsCount = Convert.ToString(MGetErrorFitmentsCount(tenantID, reader["ID"] is DBNull ? string.Empty : reader["ID"].ToString()))

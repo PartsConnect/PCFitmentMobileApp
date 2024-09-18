@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using PCFitment_API.Services;
 using System.Text;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using PCFitment_API.Controllers.v1;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,8 +63,11 @@ builder.Services.AddScoped<BatchUploadService>();
 builder.Services.AddScoped<SubmitToAmazonService>();
 builder.Services.AddScoped<SubmitToWalmartService>();
 builder.Services.AddScoped<SubmittoeBayService>();
+builder.Services.AddScoped<AutosyncService>();
+builder.Services.AddScoped<InheritedPartsService>();
 builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 builder.Services.AddSingleton<IUrlHelperFactory, UrlHelperFactory>();
+builder.Services.AddControllersWithViews(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

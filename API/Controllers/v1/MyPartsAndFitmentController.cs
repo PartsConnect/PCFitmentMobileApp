@@ -22,7 +22,7 @@ namespace PCFitment_API.Controllers.v1
         {
             _myPartsAndFitmentService = myPartsAndFitmentService;
         }
-        
+
         [Authorize]
         [HttpGet("GetMyPartsAndFitment")]
         public IActionResult GetMyPartsAndFitment([FromQuery] PARMyPartsAndFitment pARMy)

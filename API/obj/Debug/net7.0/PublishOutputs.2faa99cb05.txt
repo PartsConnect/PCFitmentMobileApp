@@ -1,4 +1,5 @@
 F:\Working-Project\PCFitmentMobileApp\API\obj\Release\net7.0\PubTmp\Out\PCFitment_API.exe
+F:\Working-Project\PCFitmentMobileApp\API\obj\Release\net7.0\PubTmp\Out\web.config
 F:\Working-Project\PCFitmentMobileApp\API\obj\Release\net7.0\PubTmp\Out\appsettings.Development.json
 F:\Working-Project\PCFitmentMobileApp\API\obj\Release\net7.0\PubTmp\Out\appsettings.json
 F:\Working-Project\PCFitmentMobileApp\API\obj\Release\net7.0\PubTmp\Out\PCFitment_API.dll

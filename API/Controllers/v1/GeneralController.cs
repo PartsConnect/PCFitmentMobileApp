@@ -22,7 +22,6 @@ namespace PCFitment_API.Controllers.v1
             _generalService = generalService;
         }
 
-        [Authorize]
         [HttpGet("GetHelpVideosDetails")]
         public IActionResult GetHelpVideosDetails()
         {
@@ -62,6 +61,32 @@ namespace PCFitment_API.Controllers.v1
             catch (Exception ex)
             {
                 response = Ok(new { StatusCode = (int)HttpStatusCode.InternalServerError, Status = HttpStatusCode.InternalServerError.ToString(), Message = ex.Message + ", Please contact to system admin" });
+            }
+
+            return response;
+        }
+
+        [HttpGet("GetBrands")]
+        public IActionResult GetBrands([FromQuery] string tenantID)
+        {
+            IEnumerable<MDLBrandCode> data = null;
+            IActionResult response = Unauthorized();
+            try
+            {
+                data = (IEnumerable<MDLBrandCode>)_generalService.GetBrands(Convert.ToInt32(tenantID));
+
+                if (data.Any())
+                {
+                    response = Ok(new { StatusCode = (int)HttpStatusCode.OK, Status = HttpStatusCode.OK.ToString(), Message = Messages.CON_Success, data });
+                }
+                else
+                {
+                    response = Ok(new { StatusCode = (int)HttpStatusCode.NoContent, Status = HttpStatusCode.NoContent.ToString(), Message = Messages.CON_No_Data_Found, data });
+                }
+            }
+            catch (Exception ex)
+            {
+                response = Ok(new { StatusCode = (int)HttpStatusCode.InternalServerError, Status = HttpStatusCode.InternalServerError.ToString(), Message = ex.Message + ", Please contact to system admin", data });
             }
 
             return response;

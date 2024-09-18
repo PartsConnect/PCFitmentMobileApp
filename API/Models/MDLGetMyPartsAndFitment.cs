@@ -15,6 +15,7 @@ namespace PCFitment_API.Models
         public string PartDescription { get; set; }
         public string TenantID { get; set; }
         public string IsAmazonFit { get; set; }
+        public string ParentPart { get; set; }
         public string PartNumber { get; set; }
         public string CollectionID { get; set; }
         public string Fitmentsnum { get; set; }

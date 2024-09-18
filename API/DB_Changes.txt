@@ -1,4 +1,4 @@
-------------------------------------------
+﻿------------------------------------------
 -- Name : Bhavesh D. Rathod
 -- Date : 06/08/2024
 -- Note : For bifurcation of various devices
@@ -27,3 +27,241 @@ BEGIN
     PRINT 'Column ModelName already exists';
 END
 --------------------------------------------------------
+
+-- Declare variables
+DECLARE @TextContent NVARCHAR(MAX) = 'InheritedParts_Label1';
+DECLARE @OriginalLanguageID INT = 1;
+DECLARE @TextContentID INT;
+DECLARE @LanguageID INT;
+DECLARE @Translation NVARCHAR(MAX);
+
+-- Insert text content and get the ID
+INSERT INTO [dbo].[App_TextContent] ([TextContent], [OriginalLanguageID])
+VALUES (@TextContent, @OriginalLanguageID);
+
+-- Get the ID of the inserted text content
+SET @TextContentID = SCOPE_IDENTITY();
+
+-- Define translations for different languages
+;WITH Translations AS (
+    SELECT 
+        LanguageID,
+        Translation,
+        ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS RowNum
+    FROM (VALUES
+        (1, N'The inherited parts contain the fitments of the main part# ##PARTNUMBER##.'),
+        (3, N'继承的部件包含主要部件# ##PARTNUMBER## 的配件。')
+    ) AS v (LanguageID, Translation)
+)
+-- Insert translations into the App_Translations table
+INSERT INTO [dbo].[App_Translations] ([Languageld], [TextContentld], [Translation])
+SELECT 
+    LanguageID,
+    @TextContentID,
+    Translation
+FROM Translations;
+---------------
+-- Declare variables
+DECLARE @TextContent NVARCHAR(MAX) = 'InheritedParts_Label2';
+DECLARE @OriginalLanguageID INT = 1;
+DECLARE @TextContentID INT;
+DECLARE @LanguageID INT;
+DECLARE @Translation NVARCHAR(MAX);
+
+-- Insert text content and get the ID
+INSERT INTO [dbo].[App_TextContent] ([TextContent], [OriginalLanguageID])
+VALUES (@TextContent, @OriginalLanguageID);
+
+-- Get the ID of the inserted text content
+SET @TextContentID = SCOPE_IDENTITY();
+
+-- Define translations for different languages
+;WITH Translations AS (
+    SELECT 
+        LanguageID,
+        Translation,
+        ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS RowNum
+    FROM (VALUES
+        (1, N'You cannot add or update fitments in specific inherited parts directly.'),
+        (3, N'您不能直接在特定的继承部件中添加或更新配件。')
+    ) AS v (LanguageID, Translation)
+)
+-- Insert translations into the App_Translations table
+INSERT INTO [dbo].[App_Translations] ([Languageld], [TextContentld], [Translation])
+SELECT 
+    LanguageID,
+    @TextContentID,
+    Translation
+FROM Translations;
+
+---------------
+-- Declare variables
+DECLARE @TextContent NVARCHAR(MAX) = 'InheritedParts_Label3';
+DECLARE @OriginalLanguageID INT = 1;
+DECLARE @TextContentID INT;
+DECLARE @LanguageID INT;
+DECLARE @Translation NVARCHAR(MAX);
+
+-- Insert text content and get the ID
+INSERT INTO [dbo].[App_TextContent] ([TextContent], [OriginalLanguageID])
+VALUES (@TextContent, @OriginalLanguageID);
+
+-- Get the ID of the inserted text content
+SET @TextContentID = SCOPE_IDENTITY();
+
+-- Define translations for different languages
+;WITH Translations AS (
+    SELECT 
+        LanguageID,
+        Translation,
+        ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS RowNum
+    FROM (VALUES
+        (1, N'Whenever you update the fitments of the main part# ##PARTNUMBER##, the changes will affect all inherited parts automatically.'),
+        (3, N'每当您更新主要零件# ##PARTNUMBER## 的配件时，这些更改都会自动影响所有继承的零件。')
+    ) AS v (LanguageID, Translation)
+)
+-- Insert translations into the App_Translations table
+INSERT INTO [dbo].[App_Translations] ([Languageld], [TextContentld], [Translation])
+SELECT 
+    LanguageID,
+    @TextContentID,
+    Translation
+FROM Translations;
+
+---------------
+-- Declare variables
+DECLARE @TextContent NVARCHAR(MAX) = 'InheritedParts_Label4';
+DECLARE @OriginalLanguageID INT = 1;
+DECLARE @TextContentID INT;
+DECLARE @LanguageID INT;
+DECLARE @Translation NVARCHAR(MAX);
+
+-- Insert text content and get the ID
+INSERT INTO [dbo].[App_TextContent] ([TextContent], [OriginalLanguageID])
+VALUES (@TextContent, @OriginalLanguageID);
+
+-- Get the ID of the inserted text content
+SET @TextContentID = SCOPE_IDENTITY();
+
+-- Define translations for different languages
+;WITH Translations AS (
+    SELECT 
+        LanguageID,
+        Translation,
+        ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS RowNum
+    FROM (VALUES
+        (1, N'Make necessary fitment updates directly to the main part# ##PARTNUMBER## to ensure consistency across all inherited parts.'),
+        (3, N'直接对主要部件# ##PARTNUMBER## 进行必要的装配更新，以确保所有继承部件的一致性。')
+    ) AS v (LanguageID, Translation)
+)
+-- Insert translations into the App_Translations table
+INSERT INTO [dbo].[App_Translations] ([Languageld], [TextContentld], [Translation])
+SELECT 
+    LanguageID,
+    @TextContentID,
+    Translation
+FROM Translations;
+
+---------------
+-- Declare variables
+DECLARE @TextContent NVARCHAR(MAX) = 'InheritedParts_Label5';
+DECLARE @OriginalLanguageID INT = 1;
+DECLARE @TextContentID INT;
+DECLARE @LanguageID INT;
+DECLARE @Translation NVARCHAR(MAX);
+
+-- Insert text content and get the ID
+INSERT INTO [dbo].[App_TextContent] ([TextContent], [OriginalLanguageID])
+VALUES (@TextContent, @OriginalLanguageID);
+
+-- Get the ID of the inserted text content
+SET @TextContentID = SCOPE_IDENTITY();
+
+-- Define translations for different languages
+;WITH Translations AS (
+    SELECT 
+        LanguageID,
+        Translation,
+        ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS RowNum
+    FROM (VALUES
+        (1, N'Fitment are inherited from Part# ##PARTNUMBER##'),
+        (3, N'配件继承自零件号 ##PARTNUMBER##')
+    ) AS v (LanguageID, Translation)
+)
+-- Insert translations into the App_Translations table
+INSERT INTO [dbo].[App_Translations] ([Languageld], [TextContentld], [Translation])
+SELECT 
+    LanguageID,
+    @TextContentID,
+    Translation
+FROM Translations;
+
+---------------
+-- Declare variables
+DECLARE @TextContent NVARCHAR(MAX) = 'InheritedParts_Label6';
+DECLARE @OriginalLanguageID INT = 1;
+DECLARE @TextContentID INT;
+DECLARE @LanguageID INT;
+DECLARE @Translation NVARCHAR(MAX);
+
+-- Insert text content and get the ID
+INSERT INTO [dbo].[App_TextContent] ([TextContent], [OriginalLanguageID])
+VALUES (@TextContent, @OriginalLanguageID);
+
+-- Get the ID of the inserted text content
+SET @TextContentID = SCOPE_IDENTITY();
+
+-- Define translations for different languages
+;WITH Translations AS (
+    SELECT 
+        LanguageID,
+        Translation,
+        ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS RowNum
+    FROM (VALUES
+        (1, N'Fitments for Part# ##CHILDPARTNUMBER## are inherited from Parent Part# ##PARTNUMBER##'),
+        (3, N'零件号 ##CHILDPARTNUMBER## 的配件继承自父零件号 ##PARTNUMBER##')
+    ) AS v (LanguageID, Translation)
+)
+-- Insert translations into the App_Translations table
+INSERT INTO [dbo].[App_Translations] ([Languageld], [TextContentld], [Translation])
+SELECT 
+    LanguageID,
+    @TextContentID,
+    Translation
+FROM Translations;
+
+---------------
+-- Declare variables
+DECLARE @TextContent NVARCHAR(MAX) = 'InheritedParts_Label7';
+DECLARE @OriginalLanguageID INT = 1;
+DECLARE @TextContentID INT;
+DECLARE @LanguageID INT;
+DECLARE @Translation NVARCHAR(MAX);
+
+-- Insert text content and get the ID
+INSERT INTO [dbo].[App_TextContent] ([TextContent], [OriginalLanguageID])
+VALUES (@TextContent, @OriginalLanguageID);
+
+-- Get the ID of the inserted text content
+SET @TextContentID = SCOPE_IDENTITY();
+
+-- Define translations for different languages
+;WITH Translations AS (
+    SELECT 
+        LanguageID,
+        Translation,
+        ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS RowNum
+    FROM (VALUES
+        (1, N'Part# ##CHILDPARTNUMBER## contains the same fitments as Parent Part# ##PARTNUMBER## and cannot be added or updated directly.'),
+        (3, N'零件编号 ##CHILDPARTNUMBER## 包含与父零件编号 ##PARTNUMBER## 相同的配件，无法直接添加或更新。')
+    ) AS v (LanguageID, Translation)
+)
+-- Insert translations into the App_Translations table
+INSERT INTO [dbo].[App_Translations] ([Languageld], [TextContentld], [Translation])
+SELECT 
+    LanguageID,
+    @TextContentID,
+    Translation
+FROM Translations;
+
+---------------

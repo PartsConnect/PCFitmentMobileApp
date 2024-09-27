@@ -963,7 +963,7 @@ namespace PCFitment_API.Services
             {
                 conn.Open();
                 stbSqlQuery.Clear();
-                stbSqlQuery.Append(@" SELECT * FROM [dbo].[App_Notification_History] WHERE TenantID = @TenantID AND Flagdeleted = 0 AND IsNotificationSent = 1 ORDER BY App_NotificationHistoryID DESC ");
+                stbSqlQuery.Append(@" SELECT *,FORMAT(CreateDate, 'MM/dd/yyyy hh:mm:ss tt') AS CreateDate FROM [dbo].[App_Notification_History] WHERE TenantID = 2 AND Flagdeleted = 0 ORDER BY App_NotificationHistoryID DESC ");
                 mDLGetNotifications = conn.Query<MDLGetNotificationHistory>(stbSqlQuery.ToString(), new { TenantID = tenantID }).ToList();
                 conn.Close();
             }

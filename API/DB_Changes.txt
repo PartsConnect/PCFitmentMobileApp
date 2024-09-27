@@ -265,3 +265,115 @@ SELECT
 FROM Translations;
 
 ---------------
+Name : Bhavesh D. Rathod
+Date : 19/09/2024
+
+/****** Object:  Table [dbo].[App_Notification_Trace]    Script Date: 09/20/2024 12:40:42 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[App_Notification_Trace](
+	[App_Notification_Trace_ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[App_SettingsID] [bigint] NOT NULL,
+	[Custom_NotificationID] [bigint] NOT NULL,
+	[TenantID] [bigint] NULL,
+	[IsNotificationSent] [bit] NOT NULL,
+	[Reason] [nvarchar](max) NULL,
+	[CreateDate] [datetime] NOT NULL,
+	[Flagdeleted] [bit] NULL,
+	[DeletedDate] [datetime] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[App_Notification_Trace] ADD  DEFAULT ((0)) FOR [IsNotificationSent]
+GO
+
+ALTER TABLE [dbo].[App_Notification_Trace] ADD  DEFAULT (getdate()) FOR [CreateDate]
+GO
+
+ALTER TABLE [dbo].[App_Notification_Trace] ADD  DEFAULT ((0)) FOR [Flagdeleted]
+GO
+
+---------------
+
+DECLARE @sql NVARCHAR(MAX) = '';
+
+-- Drop constraints for IsNotificationSent
+SELECT @sql += 'ALTER TABLE [dbo].[App_Custom_Notification] DROP CONSTRAINT [' + d.name + ']; '
+FROM sys.default_constraints AS d
+JOIN sys.columns AS c ON d.parent_object_id = c.object_id AND d.parent_column_id = c.column_id
+WHERE c.object_id = OBJECT_ID('[dbo].[App_Custom_Notification]') 
+AND c.name = 'IsNotificationSent';
+
+-- Drop the IsNotificationSent column if it exists
+IF COL_LENGTH('[dbo].[App_Custom_Notification]', 'IsNotificationSent') IS NOT NULL
+BEGIN
+    SET @sql += 'ALTER TABLE [dbo].[App_Custom_Notification] DROP COLUMN IsNotificationSent; ';
+END
+
+-- Drop constraints for NotificationDate
+SELECT @sql += 'ALTER TABLE [dbo].[App_Custom_Notification] DROP CONSTRAINT [' + d.name + ']; '
+FROM sys.default_constraints AS d
+JOIN sys.columns AS c ON d.parent_object_id = c.object_id AND d.parent_column_id = c.column_id
+WHERE c.object_id = OBJECT_ID('[dbo].[App_Custom_Notification]') 
+AND c.name = 'NotificationDate';
+
+-- Drop the NotificationDate column if it exists
+IF COL_LENGTH('[dbo].[App_Custom_Notification]', 'NotificationDate') IS NOT NULL
+BEGIN
+    SET @sql += 'ALTER TABLE [dbo].[App_Custom_Notification] DROP COLUMN NotificationDate; ';
+END
+
+-- Drop constraints for SentDate
+SELECT @sql += 'ALTER TABLE [dbo].[App_Custom_Notification] DROP CONSTRAINT [' + d.name + ']; '
+FROM sys.default_constraints AS d
+JOIN sys.columns AS c ON d.parent_object_id = c.object_id AND d.parent_column_id = c.column_id
+WHERE c.object_id = OBJECT_ID('[dbo].[App_Custom_Notification]') 
+AND c.name = 'SentDate';
+
+-- Drop the SentDate column if it exists
+IF COL_LENGTH('[dbo].[App_Custom_Notification]', 'SentDate') IS NOT NULL
+BEGIN
+    SET @sql += 'ALTER TABLE [dbo].[App_Custom_Notification] DROP COLUMN SentDate; ';
+END
+
+-- Execute the generated SQL
+EXEC sp_executesql @sql;
+-------------
+DECLARE @sql NVARCHAR(MAX) = '';
+
+-- Drop constraints for IsNotificationSent
+SELECT @sql += 'ALTER TABLE [dbo].[App_Notification_History] DROP CONSTRAINT [' + d.name + ']; '
+FROM sys.default_constraints AS d
+JOIN sys.columns AS c ON d.parent_object_id = c.object_id AND d.parent_column_id = c.column_id
+WHERE c.object_id = OBJECT_ID('[dbo].[App_Notification_History]') 
+AND c.name = 'IsNotificationSent';
+
+-- Drop the IsNotificationSent column if it exists
+IF COL_LENGTH('[dbo].[App_Notification_History]', 'IsNotificationSent') IS NOT NULL
+BEGIN
+    SET @sql += 'ALTER TABLE [dbo].[App_Notification_History] DROP COLUMN IsNotificationSent; ';
+END
+
+-- Drop constraints for LinkPage
+SELECT @sql += 'ALTER TABLE [dbo].[App_Notification_History] DROP CONSTRAINT [' + d.name + ']; '
+FROM sys.default_constraints AS d
+JOIN sys.columns AS c ON d.parent_object_id = c.object_id AND d.parent_column_id = c.column_id
+WHERE c.object_id = OBJECT_ID('[dbo].[App_Notification_History]') 
+AND c.name = 'LinkPage';
+
+-- Drop the LinkPage column if it exists
+IF COL_LENGTH('[dbo].[App_Notification_History]', 'LinkPage') IS NOT NULL
+BEGIN
+    SET @sql += 'ALTER TABLE [dbo].[App_Notification_History] DROP COLUMN LinkPage; ';
+END
+
+-- Execute the generated SQL
+EXEC sp_executesql @sql;
+
+-----------------------------  
+--till Live Clear
+-----------------------------

@@ -50,22 +50,54 @@ namespace PCFitment_API.Controllers.v1
         [HttpPost("SendNotification")]
         public IActionResult SendNotification(MDLSendNotification sendNotification)
         {
-            IActionResult response = Unauthorized();
+            IActionResult response;
+            string responseMessage;
+            string[] responseParts;
+            string msgCode;
+            string msg;
+            int statusCode;
 
             try
             {
-                _generalService.SendNotification(sendNotification);
+                responseMessage = _generalService.SendNotification(sendNotification);
 
-                response = Ok(new { StatusCode = (int)HttpStatusCode.OK, Status = HttpStatusCode.OK.ToString(), Message = Messages.CON_Notification });
+                if (!string.IsNullOrEmpty(responseMessage))
+                {
+                    responseParts = responseMessage.Split('|');
+                    msgCode = responseParts[0];
+                    msg = responseParts.Length > 1 ? responseParts[1] : "";
+
+                    switch (msgCode.ToLower())
+                    {
+                        case "s":
+                            statusCode = (int)HttpStatusCode.OK;
+                            break;
+                        case "f":
+                            statusCode = (int)HttpStatusCode.NoContent;
+                            break;
+                        default:
+                            statusCode = (int)HttpStatusCode.InternalServerError;
+                            msg = "Unexpected response code.";
+                            break;
+                    }
+                }
+                else
+                {
+                    statusCode = (int)HttpStatusCode.NoContent;
+                    msg = "No response from service.";
+                }
+
+                response = Ok(new { StatusCode = statusCode, Status = ((HttpStatusCode)statusCode).ToString(), Message = msg });
             }
             catch (Exception ex)
             {
-                response = Ok(new { StatusCode = (int)HttpStatusCode.InternalServerError, Status = HttpStatusCode.InternalServerError.ToString(), Message = ex.Message + ", Please contact to system admin" });
+                response = Ok(new { StatusCode = (int)HttpStatusCode.InternalServerError, Status = HttpStatusCode.InternalServerError.ToString(), Message = ex.Message + ", Please contact system admin" });
             }
 
             return response;
         }
 
+        [Authorize]
         [HttpGet("GetBrands")]
         public IActionResult GetBrands([FromQuery] string tenantID)
         {
@@ -87,6 +119,56 @@ namespace PCFitment_API.Controllers.v1
             catch (Exception ex)
             {
                 response = Ok(new { StatusCode = (int)HttpStatusCode.InternalServerError, Status = HttpStatusCode.InternalServerError.ToString(), Message = ex.Message + ", Please contact to system admin", data });
+            }
+
+            return response;
+        }
+
+        [HttpPost("SendErrorEmail")]
+        public IActionResult SendErrorEmail(MDLSendErrorEmail sendErrorEmail)
+        {
+            IActionResult response;
+            string responseMessage;
+            string[] responseParts;
+            string msgCode;
+            string msg;
+            int statusCode;
+
+            try
+            {
+                responseMessage = _generalService.SendErrorEmail(sendErrorEmail);
+
+                if (!string.IsNullOrEmpty(responseMessage))
+                {
+                    responseParts = responseMessage.Split('|');
+                    msgCode = responseParts[0];
+                    msg = responseParts.Length > 1 ? responseParts[1] : "";
+
+                    switch (msgCode.ToLower())
+                    {
+                        case "s":
+                            statusCode = (int)HttpStatusCode.OK;
+                            break;
+                        case "f":
+                            statusCode = (int)HttpStatusCode.NoContent;
+                            break;
+                        default:
+                            statusCode = (int)HttpStatusCode.InternalServerError;
+                            msg = "Unexpected response code.";
+                            break;
+                    }
+                }
+                else
+                {
+                    statusCode = (int)HttpStatusCode.NoContent;
+                    msg = "No response from service.";
+                }
+
+                response = Ok(new { StatusCode = statusCode, Status = ((HttpStatusCode)statusCode).ToString(), Message = msg });
+            }
+            catch (Exception ex)
+            {
+                response = Ok(new { StatusCode = (int)HttpStatusCode.InternalServerError, Status = HttpStatusCode.InternalServerError.ToString(), Message = ex.Message + ", Please contact system admin" });
             }
 
             return response;

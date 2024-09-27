@@ -6,3 +6,29 @@
     "DefaultStripeSecretKey": "LIVE_STIPE_key_nEED_TO_rEPLACE"
   },
 ----------------------------------------
+--Name : Bhavesh D. Rathod
+--Date : 18/09/2024
+--Note : Notification Change
+
+"FirebaseProjectkey": {
+    "DefaultFirebaseProjectkey": "https://fcm.googleapis.com/v1/projects/pcfitment-9d36b/messages:send"
+  },
+
+  "EmailSettings": {
+    "DisplayName": "Stage",
+    "Smtp": "smtp.gmail.com",
+    "FromEmail": "st09542@gmail.com",
+    "FromPass": "ygfleoraclmbzcmn",
+    "To": "bhavesh@omexinfotech.in"
+  },
+    "JsonPhysicalPath": {
+    "DefaultJsonPhysicalPath": "F:\\Working-Project\\PCFitmentMobileApp\\API\\Required_Files\\"
+  },
+
+
+  *Remove
+  FirebaseServerkey
+
+-----------------------------  
+--till Live Clear
+-----------------------------

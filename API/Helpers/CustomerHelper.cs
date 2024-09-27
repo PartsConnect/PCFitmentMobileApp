@@ -2,6 +2,8 @@
 using System.Data;
 using TestRestAPI.Models.Utilities;
 using Dapper;
+using System.Collections.Generic;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace PartsConnectWebTools.Helpers
 {
@@ -16,7 +18,7 @@ namespace PartsConnectWebTools.Helpers
         public static DataTable GetFCMTokenListForApp(int TenantID)
         {
             DataTable user = new DataTable();
-            string Query = @" SELECT FCMToken,TenantID FROM [dbo].[App_Settings] WHERE ISActive = 1 ";
+            string Query = @" SELECT FCMToken,TenantID,App_SettingsID FROM [dbo].[App_Settings] WHERE ISActive = 1 ";
             if (TenantID > 0)
             {
                 Query += @" AND TenantID = @TenantID";
@@ -39,7 +41,7 @@ namespace PartsConnectWebTools.Helpers
 
         }
 
-        public static int AddAppCustomNotification_History(string Notification_Type, int TenantID, string NotificationTitle, string NotificationMessage, string LinkPage, int ReferenceId)
+        public static int AddAppCustomNotification_History(string Notification_Type, int TenantID, string NotificationTitle, string NotificationMessage, int ReferenceId)
         {
             string Query = "";
             int InsertedId = 0;
@@ -52,7 +54,7 @@ namespace PartsConnectWebTools.Helpers
                                         and TenantID = @TenantID 
                                         and NotificationTitle = @NotificationTitle 
                                         and NotificationMessage = @NotificationMessage
-                                        and ReferenceId = @ReferenceId  and IsNotificationSent = @IsNotificationSent
+                                        and ReferenceId = @ReferenceId
                                             ) 
  
                                             begin
@@ -63,18 +65,12 @@ namespace PartsConnectWebTools.Helpers
                                                                            ,[TenantID]
                                                                            ,[NotificationTitle]
                                                                            ,[NotificationMessage]
-                                                                           ,[LinkPage]
-                                                                           ,[IsNotificationSent]
-                                                                           ,[Flagdeleted]
                                                                            ,[ReferenceId])
                                                                      VALUES
                                                                            (@Notification_Type 
                                                                            ,@TenantID 
                                                                            ,@NotificationTitle 
                                                                            ,@NotificationMessage 
-                                                                           ,@LinkPage 
-                                                                           ,@IsNotificationSent 
-                                                                           ,@Flagdeleted 
                                                                            ,@ReferenceId ); SELECT SCOPE_IDENTITY() ;
 
                                             END";
@@ -87,10 +83,45 @@ namespace PartsConnectWebTools.Helpers
                         TenantID = TenantID,
                         NotificationTitle = NotificationTitle,
                         NotificationMessage = NotificationMessage,
-                        LinkPage = LinkPage,
-                        IsNotificationSent = "1",
-                        Flagdeleted = "0",
                         ReferenceId = ReferenceId
+                    });
+                    conn.Close();
+                }
+            }
+            return InsertedId;
+        }
+
+        public static int AddApp_Notification_Trace(string App_SettingsID = "0", string Custom_NotificationID = "0", string TenantID = "0", bool IsNotificationSent = false, string message = "")
+        {
+            string Query = "";
+            int InsertedId = 0;
+
+            if (Convert.ToInt32(TenantID) > 0)
+            {
+                Query = @"INSERT INTO [dbo].[App_Notification_Trace]
+                               ([App_SettingsID]
+                               ,[Custom_NotificationID]
+                               ,[TenantID]
+                               ,[IsNotificationSent]
+                               ,[Reason])
+                         VALUES
+                               (@App_SettingsID
+                               ,@Custom_NotificationID
+                               ,@TenantID
+                               ,@IsNotificationSent
+                               ,@Reason);
+                         SELECT SCOPE_IDENTITY();";
+
+                using (var conn = new SqlConnection(myConnectionString))
+                {
+                    conn.Open();
+                    conn.Query(Query, new
+                    {
+                        App_SettingsID = App_SettingsID,
+                        Custom_NotificationID = Custom_NotificationID,
+                        TenantID = TenantID,
+                        IsNotificationSent = IsNotificationSent,
+                        Reason = message
                     });
                     conn.Close();
                 }

@@ -50,13 +50,6 @@ namespace TestRestAPI.Models.Utilities
             string physicalPath = Convert.ToString(configuration.GetSection("PhysicalPath").GetSection("DefaultPhysicalPath").Value);
             return physicalPath;
         }
-        //Firebase Server Key
-        public static string GetFirebaseServerkey()
-        {
-            var configuration = GetConfiguration();
-            string FirebaseServerkey = Convert.ToString(configuration.GetSection("FirebaseServerkey").GetSection("DefaultFirebaseServerkey").Value);
-            return FirebaseServerkey;
-        }
 
         //Get Stripe Secret Key
         public static string GetStripeSecretKey()
@@ -114,6 +107,38 @@ namespace TestRestAPI.Models.Utilities
             int PageSize = Convert.ToInt32(configuration.GetSection("PageSize").GetSection("DefaultPageSize").Value);
             return PageSize;
         }
+
+        public static string GetFirebaseProjectkey()
+        {
+            var configuration = GetConfiguration();
+            string FirebaseProjectkey = Convert.ToString(configuration.GetSection("FirebaseProjectkey").GetSection("DefaultFirebaseProjectkey").Value);
+            return FirebaseProjectkey;
+        }
+
+        public static string JsonPhysicalPath()
+        {
+            var configuration = GetConfiguration();
+            string JsonPhysicalPath = Convert.ToString(configuration.GetSection("JsonPhysicalPath").GetSection("DefaultJsonPhysicalPath").Value);
+            return JsonPhysicalPath;
+        }
+
+        public static (string DisplayName, string Port,string ErrorTo, string ErrorBcc, string ErrorCc, string Smtp, string FromEmail, string FromPass, string To) GetEmailSettings()
+        {
+            var configuration = GetConfiguration();
+            string displayName = configuration.GetSection("EmailSettings").GetSection("DisplayName").Value;
+            string Port = configuration.GetSection("Port").GetSection("Port").Value;
+            string smtp = configuration.GetSection("EmailSettings").GetSection("Smtp").Value;
+            string fromEmail = configuration.GetSection("EmailSettings").GetSection("FromEmail").Value;
+            string ErrorTo = configuration.GetSection("EmailSettings").GetSection("ErrorTo").Value;
+            string ErrorBcc = configuration.GetSection("EmailSettings").GetSection("ErrorBcc").Value;
+            string ErrorCc = configuration.GetSection("EmailSettings").GetSection("ErrorCc").Value;
+            string fromPass = configuration.GetSection("EmailSettings").GetSection("FromPass").Value;
+            string to = configuration.GetSection("EmailSettings").GetSection("To").Value;
+
+            return (displayName, Port, ErrorTo, ErrorBcc, ErrorCc, smtp, fromEmail, fromPass, to);
+        }
+
+
         public static bool IsCustomFitmentsAccess(int TenantID)
         {
             try

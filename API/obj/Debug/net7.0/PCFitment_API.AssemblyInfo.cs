@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PCFitment_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2706fccb186db598d58f3e17b49bf162cb2d2566")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e73f95dc98e703d244193cc13cf0f44a846d30a0")]
 [assembly: System.Reflection.AssemblyProductAttribute("PCFitment_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PCFitment_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

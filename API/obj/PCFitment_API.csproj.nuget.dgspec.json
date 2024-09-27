@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Working-Project\\PCFitmentMobileApp\\API\\PCFitment_API.csproj": {}
+    "F:\\Working-Project\\PCFitmentMobileApp\\API\\API\\PCFitment_API.csproj": {}
   },
   "projects": {
-    "F:\\Working-Project\\PCFitmentMobileApp\\API\\PCFitment_API.csproj": {
+    "F:\\Working-Project\\PCFitmentMobileApp\\API\\API\\PCFitment_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Working-Project\\PCFitmentMobileApp\\API\\PCFitment_API.csproj",
+        "projectUniqueName": "F:\\Working-Project\\PCFitmentMobileApp\\API\\API\\PCFitment_API.csproj",
         "projectName": "PCFitment_API",
-        "projectPath": "F:\\Working-Project\\PCFitmentMobileApp\\API\\PCFitment_API.csproj",
+        "projectPath": "F:\\Working-Project\\PCFitmentMobileApp\\API\\API\\PCFitment_API.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "F:\\Working-Project\\PCFitmentMobileApp\\API\\obj\\",
+        "outputPath": "F:\\Working-Project\\PCFitmentMobileApp\\API\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -53,6 +53,10 @@
             "Dapper.Extension": {
               "target": "Package",
               "version": "[1.0.0.1, )"
+            },
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.68.0, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",

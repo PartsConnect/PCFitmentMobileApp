@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dNtjn7/UN3A=",
+  "dgSpecHash": "2qg5GVDcxAQ=",
   "success": true,
-  "projectFilePath": "F:\\Working-Project\\PCFitmentMobileApp\\API\\API\\PCFitment_API.csproj",
+  "projectFilePath": "F:\\Working-Project\\Git\\PCFitmentMobileApp\\API\\PCFitment_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

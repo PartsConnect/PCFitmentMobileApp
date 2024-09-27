@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Working-Project\\PCFitmentMobileApp\\API\\API\\PCFitment_API.csproj": {}
+    "F:\\Working-Project\\Git\\PCFitmentMobileApp\\API\\PCFitment_API.csproj": {}
   },
   "projects": {
-    "F:\\Working-Project\\PCFitmentMobileApp\\API\\API\\PCFitment_API.csproj": {
+    "F:\\Working-Project\\Git\\PCFitmentMobileApp\\API\\PCFitment_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Working-Project\\PCFitmentMobileApp\\API\\API\\PCFitment_API.csproj",
+        "projectUniqueName": "F:\\Working-Project\\Git\\PCFitmentMobileApp\\API\\PCFitment_API.csproj",
         "projectName": "PCFitment_API",
-        "projectPath": "F:\\Working-Project\\PCFitmentMobileApp\\API\\API\\PCFitment_API.csproj",
+        "projectPath": "F:\\Working-Project\\Git\\PCFitmentMobileApp\\API\\PCFitment_API.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "F:\\Working-Project\\PCFitmentMobileApp\\API\\API\\obj\\",
+        "outputPath": "F:\\Working-Project\\Git\\PCFitmentMobileApp\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
